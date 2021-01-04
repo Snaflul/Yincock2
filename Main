@@ -1,0 +1,139 @@
+Star[] s = new Star[400];
+boolean gamestart = false;
+boolean customize = false;
+boolean clear = true;
+boolean runMethod = true;
+int r = 252;
+int g = 194;
+int b = 194;
+void setup() {
+  size(1400, 900);
+  for (int i = 0; i < s.length; i++) {
+    s[i] = new Star();
+  }
+}
+
+void draw() {
+  noStroke();
+  try {
+    if (!gamestart) {
+      background(0);
+      for (int i = 0; i < s.length; i++) {
+        s[i].update();
+        s[i].show();
+      }
+      textSize(50);
+      fill(255, 0, 0);
+      textAlign(CENTER);
+      text("Yin cock™ 2: The Cockening", 675, 200);
+      fill(255);
+      textSize(20);
+      text("Press Any Key To Continue, or press 'x' to customize", 675, 250);
+      if (keyPressed) {
+        switch (key) {
+        case 'x':
+          customize = true;
+          break;
+        default:
+          gamestart = true;
+          break;
+        }
+      }
+    }
+    if (gamestart) {
+    }
+    if (customize) {
+      if (clear) {
+        clear = false;
+        r = 0;
+        g = 0;
+        b = 0;
+      }
+      background(0);
+      for (int i = 0; i < s.length; i++) {
+        s[i].update();
+        s[i].show();
+      }
+      text("Press 'r','g' or 'b' to increment their values by ten.", 675, 200);
+      text("pressing 'e','f' or 'v' will decrement them by ten.", 675, 225);
+      text("Current values " + r + " " + g + " " +  b, 675, 275);
+      fill(r, g, b);
+      rect(200, 200, 200, 200);
+      fill(255);
+      switch(key) {
+      case 'r':
+        if (keyPressed && r < 255) {
+          if (!runMethod) {
+            r += 10;
+            runMethod = true;
+          } else {
+            runMethod = false;
+          }
+        }
+        break;      
+      case 'e':
+        if (keyPressed && r > 0) {
+          if (!runMethod) {
+            r -= 10;
+            runMethod = true;
+          } else {
+            runMethod = false;
+          }
+        }
+        break;
+      case 'g':
+        if (keyPressed && g < 255) {
+          if (!runMethod) {
+            g += 10;
+            runMethod = true;
+          } else {
+            runMethod = false;
+          }
+        }
+        break;
+      case 'f':
+        if (keyPressed && g > 0) {
+          if (!runMethod) {
+            g -= 10;
+            runMethod = true;
+          } else {
+            runMethod = false;
+          }
+        }
+        break;
+      case 'b':
+        if (keyPressed && b < 255) {
+          if (!runMethod) {
+            b += 10;
+            runMethod = true;
+          } else {
+            runMethod = false;
+          }
+        }
+        break;
+      case 'v':
+        if (keyPressed && b > 0) {
+          if (!runMethod) {
+            b -= 10;
+            runMethod = true;
+          } else {
+            runMethod = false;
+          }
+        }
+        break;
+      case 'q':
+        customize = false;
+        gamestart = true;
+        break;
+      default:
+        text("This key is not mapped to anything!", 675, 250);
+        break;
+      }
+      textSize(16);
+      text("Press 'q' to start game", 1200, 850);
+    }
+  } 
+  catch (Exception e) {
+    e.printStackTrace();
+  }
+}
